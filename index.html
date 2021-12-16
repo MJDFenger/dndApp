@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>D&D 5E Spells</title>
+    
+    <!-- include an external style sheet -->
+    <link rel="stylesheet" href="style.css">  
+    
+    <!-- include an external JavaScript file -->
+    <script src="myscript.js"></script>
+  </head>
+  
+  <body>
+    <!-- page content -->
+    
+		<h2>Spells by Level</h2>
+		<div id="classchoice">
+		<label>
+		<input type="checkbox" value="bard"> Bard
+		</label>
+		<button onclick="spellsByParameters()">Search with these parameters</button>
+		</div>
+		<div id="spells">
+		
+		</div>
+		
+	<div id="lightbox" >
+	<div id="lightboxbg" onclick="closeLightBox()"></div>
+      <div id="message">This is a message</div>
+	  <div id="lbbutton" onclick="closeLightBox()">Close</div>
+	  
+    </div>
+  </body>
+  
+</html>

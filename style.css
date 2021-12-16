@@ -1,0 +1,54 @@
+h1 {
+	color: lime
+	
+}
+
+#lightbox {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background-color:none; 
+  
+}
+
+#lightboxbg {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.9); 
+  
+}
+
+#message {
+    width:80%;
+    padding:20px;
+    background-color:grey;
+    color:white;
+    font-size:1.2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	max-height: 100vh;
+	overflow: auto;
+
+}
+
+#lbbutton {
+	padding:10px;
+	font-size:1.2rem;
+    background-color:#383838;
+    color:white;
+	position:fixed;
+	bottom:15px;
+	left:15px;
+}
+
+h3{
+	margin-bottom: 10px;
+}
+
