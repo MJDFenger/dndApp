@@ -1,6 +1,41 @@
-h1 {
-	color: lime
-	
+
+@import url('https://fonts.googleapis.com/css2?family=Astloch&family=Moon+Dance&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap');
+
+:root{
+	--black: #0F0E0E;
+	--purple: #522B47;
+	--red: #7B0828;
+	--darkred: #5B0808;
+	--lbbg: #89203d;
+	--tan: #fcecdf;
+}
+
+h2 {
+	font-family: "Moon Dance";
+	font-size: 2.2rem;
+	margin-bottom: 0.1rem;
+	color: var(--black);
+}
+
+body{
+	background-image: url(images/paperbg-lc.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: "EB Garamond";
+}
+
+label input{
+	width: 1.1rem;
+	height: 1.1rem;
+}
+
+#schoolchoice, #classchoice{
+	font-size: 1.1rem;
+}
+
+label{
+	white-space: nowrap;
 }
 
 #lightbox {
@@ -26,8 +61,11 @@ h1 {
 #message {
     width:80%;
     padding:20px;
-    background-color:grey;
-    color:white;
+    
+	background-image: url(images/paperbg-lc.jpg);
+	background-size: cover;
+	background-color:var(--tan);
+    color: var(--darkred);
     font-size:1.2rem;
     position: absolute;
     top: 50%;
@@ -36,6 +74,10 @@ h1 {
 	max-height: 100vh;
 	overflow: auto;
 
+}
+
+.description{
+	padding-bottom: 5rem;
 }
 
 #lbbutton {
@@ -52,3 +94,9 @@ h3{
 	margin-bottom: 10px;
 }
 
+a{
+	font-size: 1.1rem;
+	text-decoration: none;
+	margin-bottom:5px;
+	color: var(--red);
+}

@@ -16,13 +16,68 @@
   <body>
     <!-- page content -->
     
-		<h2>Spells by Level</h2>
-		<div id="classchoice">
-		<label>
-		<input type="checkbox" value="bard"> Bard
-		</label>
-		<button onclick="spellsByParameters()">Search with these parameters</button>
+		<h2>Core Spell List</h2>
+		<p>Filter By:</p>
+		<div id ="schoolchoice">
+		<!-- I know this isn't the most elegant, but it's one less fetch request. The list of magic schools isn't changing. -->
+			<b>School: </b> 
+			<label>
+				<input type="checkbox" class="schoolbox" value="abjuration">Abjuration
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="conjuration">Conjuration
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="divination">Divination
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="enchantment">Enchantment
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="evocation">Evocation
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="illusion">Illusion
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="necromancy">Necromancy
+			</label>
+			<label>
+				<input type="checkbox" class="schoolbox" value="transmutation">Transmutation
+			</label>
 		</div>
+		<br>
+		<div id="classchoice">
+			<!-- About as inefficient as the school select, but the API only has resources from the Player's Handbook, so anything outside of these classes won't be searchable. -->
+			<b>Class: </b>
+			<label>
+				<input type="checkbox" class="classbox" value="bard"> Bard
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="cleric"> Cleric
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="druid"> Druid
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="paladin"> Paladin
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="ranger"> Ranger
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="sorcerer"> Sorcerer
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="warlock"> Warlock
+			</label>
+			<label>
+				<input type="checkbox" class="classbox" value="wizard"> Wizard
+			</label>
+			<br>
+		</div>
+		<br>
+		<button onclick="spellsByParameters()">Apply Filter</button>
 		<div id="spells">
 		
 		</div>
