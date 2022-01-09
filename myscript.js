@@ -1,31 +1,29 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}     //add serviceWorker
+
+//Variables, naturally.
+//Html elements to define
 let spellDiv;
 let classBoxes;
 let schoolBoxes;
+//places to put data until it goes in the page.
 let message = "";
 let schoolSave ={};
 let spellsList = [];
-let levelCount = -1;
-let settingLevel = 0;
 let schoolsPicked = "";
 let spellsOfSchools = [];
 let classSpellsList = [];
+let levelCount = -1; //ensure the fetch requests go through for each level.
 let parameterCount = 0; //check how many parameters are used
 
 window.onload = function () {
 	spellDiv = document.getElementById("spells");
 	closeLightBox();
 	getInfo();
-	fillPage();
 	schoolBoxes = document.getElementsByClassName("schoolbox");
 	classBoxes = document.getElementsByClassName("classbox");
-	document.addEventListener("keyup", function(event) {
-		//loads the spells on key press, find a better way to do this.
-	  if (event.keyCode === 13) {
-	   event.preventDefault();
-	   fillPage();
-		}
 	
-	});
 	
 }
 function getInfo(parameter,type){

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Astloch&family=Moon+Dance&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap');
 
 :root{
@@ -12,7 +12,7 @@
 }
 
 h2 {
-	font-family: "Moon Dance";
+	font-family: "Moon Dance", serif; /* Not a serif font, but TNR is better to default to than Comic Sans */
 	font-size: 2.2rem;
 	margin-bottom: 0.1rem;
 	color: var(--black);
@@ -22,7 +22,7 @@ body{
 	background-image: url(images/paperbg-lc.jpg);
 	background-size: cover;
 	background-attachment: fixed;
-	font-family: "EB Garamond";
+	font-family: "EB Garamond", serif;
 }
 
 label input{
