@@ -62,6 +62,7 @@ function spellsByParameters(){
 	spellsOfSchools = [];
 	classSpellsList = [];
 	schoolsPicked = "";
+	document.getElementById("levellinks").innerHTML = "Jump to level: ";
 	for(classx in classBoxes){
 		//each class gets a fetch for its spell list and counts as one parameter
 		if(classBoxes[classx].checked == true){
@@ -90,15 +91,16 @@ function levelSpells(data){
 	
 	let levelCounter = 0;
 	for (levelListed in data){
+		document.getElementById("levellinks").innerHTML += "<a href='#l" + levelListed +  "'>" + levelListed + "</a>";
 		let spellsAdded = "";
 		if(data[levelListed].length > 0){
-			spellsAdded += "<h2>" + levelListed + "</h2>"; 
+			spellsAdded += "<h2 id='l"+ levelListed + "'>" + levelListed + "</h2>"; 
 			console.log(levelListed);
 			for (spell in data[levelListed]) {
 				let output = "";
 				let spellID = data[levelListed][spell]
 				output += "<a href='javascript:getSpell(\"" + spellID.url + "\")'>";
-				output += spellID.name + "</a> <br>";
+				output += spellID.name + "</a> ";
 				spellsAdded += output;
 			}
 		}
