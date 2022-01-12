@@ -23,8 +23,7 @@ window.onload = function () {
 	getInfo();
 	schoolBoxes = document.getElementsByClassName("schoolbox");
 	classBoxes = document.getElementsByClassName("classbox");
-	
-	
+	filterBoxListener();
 }
 function getInfo(parameter,type){
 	
@@ -87,15 +86,13 @@ function spellsByParameters(){
 }
 
 function levelSpells(data){
-	console.log(data);
-	
+	//console.log(data);
 	let levelCounter = 0;
 	for (levelListed in data){
 		document.getElementById("levellinks").innerHTML += "<a href='#l" + levelListed +  "'>" + levelListed + "</a>";
 		let spellsAdded = "";
 		if(data[levelListed].length > 0){
 			spellsAdded += "<h2 id='l"+ levelListed + "'>" + levelListed + "</h2>"; 
-			console.log(levelListed);
 			for (spell in data[levelListed]) {
 				let output = "";
 				let spellID = data[levelListed][spell]
@@ -216,9 +213,10 @@ function checkLevel(data,parameter,type){
 	//gets the url of the first spell
 	let spellData = data;
 	if(data.results.length > 0){
+		parameterCount++;
+		//indicate that there's another piece of information going to sortSpells
 		let urlEnd = data.results[0].url;
 		//Looks up the first spell of a set to find its level
-		parameterCount++;
 		fetch('https://www.dnd5eapi.co' + urlEnd)
 		.then(response => response.json())
 		.then(data => sortSpells(spellData,parameter,type,data.level))
@@ -228,7 +226,10 @@ function checkLevel(data,parameter,type){
 
 function sortSpells(spellData,parameter,type,levelData){
 	//if the API allowed 'class' as a parameter in requests for spells, we wouldn't be here.
+	//adds spells to their respective lists
 	if(!type || type =="s"){
+		//'all schools' won't give type 's'. 
+		//Using the same array because it simplifies things.
 		spellsOfSchools[levelData] = spellData.results;
 		parameterCount--;
 	}else if(type&&type=="c"){
@@ -240,10 +241,10 @@ function sortSpells(spellData,parameter,type,levelData){
 	if (parameterCount == 0){
 		let spellsToProcess = [];
 		if(classSpellsList.length > 0){	
+		// makes spellsToProcess the overlap of the lists.
+		// class spell lists don't work by level so it may have to filter from 'all schools'.
 			for(levelListed in spellsOfSchools){
 				spellsToProcess[levelListed] = [];
-				//spellsToProcess[levelListed] = spellsOfSchools.filter(x => classSpellsList.includes(x));
-				//spellsToProcess[levelListed] = spellsOfSchools[levelListed].filter(classIntersect);
 				for(spell in spellsOfSchools[levelListed]){
 					if(classSpellsList.find(el => el.index === spellsOfSchools[levelListed][spell].index)){
 						spellsToProcess[levelListed].push(spellsOfSchools[levelListed][spell]);
@@ -251,6 +252,7 @@ function sortSpells(spellData,parameter,type,levelData){
 				}
 			}
 		}else{
+			//if no classes were filtered, send the school list as is.
 			spellsToProcess = spellsOfSchools;
 			}
 			
@@ -259,8 +261,28 @@ function sortSpells(spellData,parameter,type,levelData){
 	
 }
 
-function classIntersect(el){
-	if (classSpellsList.find(el => el.index === spellsOfSchools[levelListed][spell].index)){
-		return true;
-	}else { return false;}
+function selectAll(groupchar){
+	let group = "";
+	if(groupchar=="s"){group = schoolBoxes;}
+	else{group = classBoxes;}
+	for(box in group){
+		group[box].checked = group[0].checked;
+	}
+}
+
+function filterBoxListener(){
+	//makes box "all" deselect when any box is deselected
+	let repeat = 0;
+	boxSetting = schoolBoxes;
+	while(repeat < 2){
+		for(box=1; box < boxSetting.length; box++){
+			boxSetting[box].addEventListener("click", function(){
+					  if (boxSetting[box].checked = false){
+						  boxSetting[0].checked = false;
+					  }
+				  })
+
+		}
+		repeat++;
+	}
 }

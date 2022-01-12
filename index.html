@@ -24,6 +24,9 @@
 		<!-- I know this isn't the most elegant, but it's one less fetch request. The list of magic schools isn't changing. -->
 			<b>School: </b> 
 			<label>
+				<input type="checkbox" name="allbox" onclick="selectAll('s')" class="schoolbox" value="all">All
+			</label>
+			<label>
 				<input type="checkbox" class="schoolbox" value="abjuration">Abjuration
 			</label>
 			<label>
@@ -52,6 +55,9 @@
 		<div id="classchoice">
 			<!-- About as inefficient as the school select, but the API only has resources from the Player's Handbook, so anything outside of these classes won't be searchable. -->
 			<b>Class: </b>
+			<label>
+				<input type="checkbox" name="allbox" onclick="selectAll('c')" class="classbox" value="all">All
+			</label>
 			<label>
 				<input type="checkbox" class="classbox" value="bard"> Bard
 			</label>
