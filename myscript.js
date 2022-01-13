@@ -16,14 +16,18 @@ let spellsOfSchools = [];
 let classSpellsList = [];
 let levelCount = -1; //ensure the fetch requests go through for each level.
 let parameterCount = 0; //check how many parameters are used
+//
+let castingClasses = ["Bard","Cleric","Druid","Paladin","Ranger","Sorcerer","Warlock","Wizard"];
+let magicSchools = ["Abjuration","Conjuration","Divination","Enchantment","Evocation","Illusion","Necromancy"];
 
 window.onload = function () {
 	spellDiv = document.getElementById("spells");
 	closeLightBox();
 	getInfo();
-	schoolBoxes = document.getElementsByClassName("schoolbox");
+	showFilters("schoolbox",magicSchools);
+	showFilters("classbox",castingClasses);
 	classBoxes = document.getElementsByClassName("classbox");
-	filterBoxListener();
+	schoolBoxes = document.getElementsByClassName("schoolbox");
 }
 function getInfo(parameter,type){
 	
@@ -62,18 +66,22 @@ function spellsByParameters(){
 	classSpellsList = [];
 	schoolsPicked = "";
 	document.getElementById("levellinks").innerHTML = "Jump to level: ";
-	for(classx in classBoxes){
-		//each class gets a fetch for its spell list and counts as one parameter
-		if(classBoxes[classx].checked == true){
-			getInfo(classBoxes[classx].value,"c");
-			parameterCount++;
+	if (classBoxes[0].checked == false){
+		for(classx in classBoxes){
+			//each class gets a fetch for its spell list and counts as one parameter
+			if(classBoxes[classx].checked == true){
+				getInfo(classBoxes[classx].value,"c");
+				parameterCount++;
+			}
 		}
 	}
-	for(schoolx in schoolBoxes){
-		if(schoolBoxes[schoolx].checked == true){
-			console.log(schoolBoxes[schoolx].value);
-			schoolsPicked += schoolBoxes[schoolx].value;
-			schoolsPicked += ",";
+	if (schoolBoxes[0].checked == false){
+		for(schoolx in schoolBoxes){
+			if(schoolBoxes[schoolx].checked == true){
+				console.log(schoolBoxes[schoolx].value);
+				schoolsPicked += schoolBoxes[schoolx].value;
+				schoolsPicked += ",";
+			}
 		}
 	}
 	if(schoolsPicked){
@@ -83,6 +91,33 @@ function spellsByParameters(){
 		schoolsPicked = schoolsPicked.slice(0, -1);
 		getInfo(schoolsPicked,"s");
 	}else{ getInfo();}
+}
+
+function showFilters(typeGiven,paraList){
+	let addedInfo = "";
+	let groupID = "";
+	let groupDiv = "";
+	
+	//set other needed variables
+	if(typeGiven == "schoolbox"){
+		groupID = "schoolBoxes";
+		groupDiv = "schoolchoice";
+		addedInfo += "<b>School: </b>";
+	}else{
+		groupID = "classBoxes";
+		groupDiv = "classchoice";
+		addedInfo += "<b>Class: </b>";
+	}
+	addedInfo += "<label><input type=\"checkbox\" name=\"allbox\" onclick=\"selectAll('";
+	addedInfo += typeGiven.charAt(0) + "')\" class=\"" + typeGiven;
+	addedInfo += "\" value = \"all\">All</label>"
+	
+	for(el in paraList){
+		addedInfo += "<label><input type=\"checkbox\" class=\"" + typeGiven;
+		addedInfo += "\" onclick=\"selectnt(" + groupID + ")\" value=\"";
+		addedInfo += paraList[el] + "\">" + paraList[el] + "</label>";
+	}
+	document.getElementById(groupDiv).innerHTML = addedInfo;
 }
 
 function levelSpells(data){
@@ -270,19 +305,32 @@ function selectAll(groupchar){
 	}
 }
 
-function filterBoxListener(){
+/* function filterBoxListener(){
 	//makes box "all" deselect when any box is deselected
 	let repeat = 0;
 	boxSetting = schoolBoxes;
 	while(repeat < 2){
-		for(box=1; box < boxSetting.length; box++){
-			boxSetting[box].addEventListener("click", function(){
-					  if (boxSetting[box].checked = false){
-						  boxSetting[0].checked = false;
-					  }
-				  })
-
+		for(box in boxSetting){
+			if(box != 0){
+				boxSetting[box].addEventListener("click", selectnt(boxSetting));
+			}
 		}
+		boxSetting = classBoxes;
 		repeat++;
+	}
+} */
+function selectnt(group){
+	let boxesChecked = -2;
+	for(box in group){
+		if(group[box].checked == false){
+			group[0].checked = false;
+		}
+		else if(box != 0){
+			boxesChecked++;
+		}
+	}
+	if(boxesChecked >= (group.length)){
+		
+		group[0].checked = true;
 	}
 }
