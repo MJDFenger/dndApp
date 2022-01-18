@@ -33,9 +33,10 @@ function getInfo(parameter,type){
 	
 	if(type && type == "c"){
 				//constructs a url for a class' spell list and gets it sorted
-				toFetch = "https://www.dnd5eapi.co/api/classes/";
-				toFetch += parameter;
+				let toFetch = "https://www.dnd5eapi.co/api/classes/";
+				toFetch += parameter.toLowerCase();
 				toFetch += "/spells/"
+    console.log(toFetch);
 				fetch(toFetch)
 				.then(response => response.json())
 				.then(data => sortSpells(data,parameter,type))
@@ -62,10 +63,10 @@ function getInfo(parameter,type){
 
 function spellsByParameters(){
 	parameterCount = 0;
-	spellsOfSchools = [];
+	spellsOfSchools = []; 
 	classSpellsList = [];
 	schoolsPicked = "";
-	document.getElementById("levellinks").innerHTML = "Jump to level: ";
+	
 	if (classBoxes[0].checked == false){
 		for(classx in classBoxes){
 			//each class gets a fetch for its spell list and counts as one parameter
@@ -121,12 +122,13 @@ function showFilters(typeGiven,paraList){
 }
 
 function levelSpells(data){
-	//console.log(data);
+	console.log(data);
 	let levelCounter = 0;
+  document.getElementById("levellinks").innerHTML = "Jump to level: ";
 	for (levelListed in data){
-		document.getElementById("levellinks").innerHTML += "<a href='#l" + levelListed +  "'>" + levelListed + "</a>";
 		let spellsAdded = "";
 		if(data[levelListed].length > 0){
+      document.getElementById("levellinks").innerHTML += "<a href='#l" + levelListed +  "'>" + levelListed + "</a>";
 			spellsAdded += "<h2 id='l"+ levelListed + "'>" + levelListed + "</h2>"; 
 			for (spell in data[levelListed]) {
 				let output = "";
@@ -134,10 +136,9 @@ function levelSpells(data){
 				output += "<a href='javascript:getSpell(\"" + spellID.url + "\")'>";
 				output += spellID.name + "</a> ";
 				spellsAdded += output;
-			}
+			} 
 		}
-		spellsList[levelCounter] = (spellsAdded);
-		levelCounter++;
+		spellsList[levelListed] = (spellsAdded);
 	}
 	fillPage();
 }
@@ -268,6 +269,7 @@ function sortSpells(spellData,parameter,type,levelData){
 		spellsOfSchools[levelData] = spellData.results;
 		parameterCount--;
 	}else if(type&&type=="c"){
+    console.log ("class spell list received!");
 		for(spell in spellData.results){
 			classSpellsList.push(spellData.results[spell]);
 		}
@@ -286,11 +288,11 @@ function sortSpells(spellData,parameter,type,levelData){
 					}
 				}
 			}
+      
 		}else{
 			//if no classes were filtered, send the school list as is.
 			spellsToProcess = spellsOfSchools;
 			}
-			
 		levelSpells(spellsToProcess);
 	}
 	
@@ -333,4 +335,13 @@ function selectnt(group){
 		
 		group[0].checked = true;
 	}
+}
+
+function intro(){
+  message = "Searching through your rulebooks for the right spell can always be frustrating, especially in the middle of a game. ";
+  message += "With this handy, ah, &quot;enchanted spellbook&quot;, ";
+  message += "you can easily find the spells you need, whether it be to consider what you should learn this level, or to check what exactly your spells are capable of.";
+  message += "";
+
+  showLightbox(message);
 }

@@ -4,10 +4,8 @@
 
 :root{
 	--black: #0F0E0E;
-	--purple: #522B47;
-	--red: #7B0828;
-	--darkred: #5B0808;
-	--lbbg: #89203d;
+	--red: #8B0828;
+	--darkred: #6B0808;
 	--tan: #fcecdf;
 }
 
@@ -107,8 +105,12 @@ a{
 	color: var(--red);
 }
 
+#introlink{
+  float: right;
+}
+
 #levellinks a{
-	margin-right: 1rem;
+	margin-right: 0.8rem;
 	padding: 0.3rem;
 }
 
