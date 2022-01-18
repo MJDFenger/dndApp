@@ -1,4 +1,4 @@
-const version = 'v1'; //change to make the browser reload the service worker
+const version = 'v4'; //change to make the browser reload the service worker
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
